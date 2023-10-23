@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registration</title>
+    <style>
+        .registration-form {
+            text-align: flex;
+            margin: 100px auto;
+            padding: 20px;
+            border: 2px solid #000000;
+            width: 300px;
+            background-color: #fff;
+        }
+
+        h1 {
+            font-size: 24px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 3px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 90%;
+            padding: 10px;
+            margin-bottom: 5px;
+            border: 2px solid #000000;
+        }
+
+        input[type="submit"] {
+            background-color: #fff;
+            border: 2px solid #000;
+            color: #000;
+            padding: 10px 20px;
+            cursor: pointer;
+            margin-bottom: 10px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #000;
+            color: #fff;
+
+        }
+
+        .action-button {
+            background-color: #fff;
+            border: 2px solid #ccc;
+            color: #000;
+            padding: 10px 20px;
+            margin-right: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .action-button:hover {
+            background-color: #ff0000;
+            color: #fff;
+        }
+
+        .back-button {
+            position: absolute;
+            top: 90px;
+            left: 33%;
+            transform: translateX(-50%);
+            text-decoration: none;
+            background-color: #ccc;
+            border: 2px solid #000;
+            color: #000;
+            padding: 5px 10px;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .back-button:hover {
+            background-color: #000;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="registration-form">
+        <h1>Registration</h1>
+
+        <form id="registrationForm" onsubmit="handleRegistration(event)">
+            <label class="form-label" for="username">Username:</label>
+            <input type="text" id="username" name="username" required><br><br>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required><br><br>
+
+            <input type="submit" value="Register">
+        </form>
+    </div>
+
+    <script>
+        function handleRegistration(event) {
+            event.preventDefault();
+
+            setTimeout(function() {
+
+                window.location.href = "registration-success.html";
+            }, 1000); 
+            return false;
+        }
+    </script>
+
+</body>
+</html>
