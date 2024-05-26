@@ -42,6 +42,24 @@
         padding: 16px;
         margin-bottom: 16px;
     }
+
+    .chat-button {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background-color: #374151;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 30px;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .chat-button svg {
+        margin-right: 8px;
+    }
 </style>
 
 <body class="bg-gray-100">
@@ -193,7 +211,7 @@
                                         <span class="text-sm font-medium">Monitori/Video tehnika</span>
                                         <span class="shrink-0 transition duration-300 group-open:-rotate-180">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
                                             </svg>
                                         </span>
                                     </summary>
@@ -228,7 +246,7 @@
                                         <span class="text-sm font-medium">Spēļu konsoles</span>
                                         <span class="shrink-0 transition duration-300 group-open:-rotate-180">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
                                             </svg>
                                         </span>
                                     </summary>
@@ -315,7 +333,7 @@
                                         <span class="text-sm font-medium">Datortīkli</span>
                                         <span class="shrink-0 transition duration-300 group-open:-rotate-180">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
                                             </svg>
                                         </span>
                                     </summary>
@@ -332,7 +350,7 @@
                                         <span class="text-sm font-medium">Serveru komponentes</span>
                                         <span class="shrink-0 transition duration-300 group-open:-rotate-180">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
                                             </svg>
                                         </span>
                                     </summary>
@@ -416,11 +434,21 @@
                     <p class="text-sm">Saņemiet atbalstu jebkurā diennakts laikā. Mēs esam šeit, lai palīdzētu jums visu diennakti.</p>
                 </div>
             </div>
+            
             <div class="mt-8 text-center text-sm text-neutral-600">
                 &copy; 2023 GoGames. All rights reserved.
             </div>
         </div>
     </footer>
+
+    <!-- Chat Support Button -->
+    <div class="chat-button" onclick="openChat()">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
+        </svg>
+        <span>Help</span>
+    </div>
+
     <script>
         function selectCategory(category) {
             // Hide all categories
@@ -458,6 +486,11 @@
         function toggleMenu() {
             const menu = document.getElementById('mobile-menu');
             menu.classList.toggle('hidden');
+        }
+
+        function openChat() {
+            // Function to open the chat support
+            alert('Chat support coming soon!');
         }
     </script>
 </body>

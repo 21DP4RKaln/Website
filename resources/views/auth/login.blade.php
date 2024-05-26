@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link href="https://rsms.me/inter/inter-ui.css" rel="stylesheet">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <style>
         ::selection {
             background: #2D2F36;
@@ -79,7 +79,7 @@
         .right {
             background: #474A59;
             box-shadow: 0px 0px 40px 16px rgba(0,0,0,0.22);
-            color: #F1F1F2;
+            color: #14b8a6;
             position: relative;
             width: 50%;
         }
@@ -126,6 +126,19 @@
         input::-moz-focus-inner { 
             border: 0; 
         }
+        button {
+            background: transparent;
+            border: 0;
+            color: #f2f2f2;
+            font-size: 20px;
+            height: 30px;
+            line-height: 30px;
+            outline: none !important;
+            width: 100%;
+        }
+        button::-moz-focus-inner { 
+            border: 0; 
+        }
         #submit {
             color: #707075;
             margin-top: 40px;
@@ -137,38 +150,88 @@
         #submit:active {
             color: #d0d0d2;
         }
+        .back-button {
+            display: flex;
+            align-items: left;
+            justify-content: left;
+            margin-top: 20px;
+            cursor: pointer;
+            color: #14b8a6;
+            text-decoration: none;
+        }
+        .back-button svg {
+            width: 24px; 
+            height: 24px;
+        }
     </style>
 </head>
+
 <body>
+    @if ($errors->any())
+        <div style="color: red;">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                 @endforeach
+            </ul>
+        </div>
+    @endif
     <div class="page">
         <div class="container">
             <div class="left">
-                <div class="login">Login</div>
+                <div class="login">{{ __('Login') }}</div>
                 <div class="eula">By logging in you agree to the ridiculously long terms that you didn't bother to read</div>
             </div>
             <div class="right">
                 <svg viewBox="0 0 320 300">
                     <defs>
                         <linearGradient id="linearGradient" x1="13" y1="193.5" x2="307" y2="193.5" gradientUnits="userSpaceOnUse">
-                            <stop style="stop-color:#ff00ff;" offset="0" />
-                            <stop style="stop-color:#ff0000;" offset="1" />
+                            <stop style="stop-color:#10b981;" offset="0" />
+                            <stop style="stop-color:#14b8a6;" offset="1" />
                         </linearGradient>
                     </defs>
                     <path d="m 40,120 240,0 c 0,0 25,0.8 25,35 0,34.2 -25,35 -25,35 h -240 c 0,0 -25,4 -25,38.5 0,34.5 25,38.5 25,38.5 h 215 c 0,0 20,-1 20,-25 0,-24 -20,-25 -20,-25 h -190 c 0,0 -20,1.7 -20,25 0,24 20,25 20,25 h 168.571" />
                 </svg>
                 <div class="form">
+                    @if (session('status'))
+                        <div>
+                            {{ session('status') }}
+                        </div>
+                    @endif
+
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
-                        <label for="email">Email</label>
-                        <input type="email" id="email" name="email" required autofocus>
-                        <label for="password">Password</label>
-                        <input type="password" id="password" name="password" required>
-                        <input type="submit" id="submit" value="Submit">
+                        <div>
+                            <label for="email">{{ __('Email') }}</label>
+                            <input type="email" id="email" name="email" required autofocus>
+                        </div>
+
+                        <div>
+                            <label for="password">{{ __('Password') }}</label>
+                            <input type="password" id="password" name="password" required>
+                        </div>
+
+                        <div>
+                            <button type="submit" id="submit" value="Submit">{{ __('Log in') }}</button>
+                        </div>
                     </form>
+
+                    <div class="back-button">
+                        <a href="/">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-0.1">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 0 1 0 12h-3" />
+                            </svg>
+                        </a>
+                    </div>
+
                 </div>
             </div>
         </div>
     </div>
+    <form id="myForm" class="mt-8 grid grid-cols-6 gap-6" method="GET" action="/">
+
+    </form>
+
     <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
     <script>
         var current = null;
@@ -220,6 +283,15 @@
                 }
             });
         });
+
+        function toggleVisibility(id) {
+            var input = document.getElementById(id);
+            if (input.type === "password") {
+                input.type = "text";
+            } else {
+                input.type = "password";
+            }
+        }
     </script>
 </body>
 </html>
