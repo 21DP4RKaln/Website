@@ -22,13 +22,25 @@
     }
 
     .border-separator {
-        border-bottom: 1px solid #ccc; /* Change the color as needed */
+        border-bottom: 1px solid #ccc;
     }
+
     .footer-section {
         border-right: 1px solid #444;
     }
+
     .footer-section:last-child {
         border-right: none;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    .product-item {
+        border: 1px solid #ccc;
+        padding: 16px;
+        margin-bottom: 16px;
     }
 </style>
 
@@ -45,9 +57,9 @@
             </div>
             <div class="flex space-x-4">
                 <a href="#" class="hover:text-gray-800">Jaunumi</a>
+                <a href="#" class="hover:text-gray-800">Balvu programma</a>
                 <a href="#" class="hover:text-gray-800">Līzings</a>
                 <a href="#" class="hover:text-gray-800">Garantija</a>
-                <a href="#" class="hover:text-gray-800">Piegāde</a>
                 <a href="#" class="hover:text-gray-800">Kontakti</a>
             </div>
         </div>
@@ -70,19 +82,19 @@
                         </button>
                     </div>
                 </div>
-                <div class="flex items-center gap-4 hidden sm:flex">
-                    <a class="rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-teal-700" href="#">
-                        Login
-                    </a>
-                    <a class="rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-teal-600 transition hover:text-teal-600/75" href="#">
-                        Register
-                    </a>
-                </div>
-                <button class="sm:hidden p-2 text-gray-600 hover:text-gray-700" onclick="toggleMenu()">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                    </svg>
-                </button>
+                    <div class="flex items-center gap-4 hidden sm:flex">
+                        <a class="rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-teal-700" href="{{ route('login') }}">
+                            Login
+                        </a>
+                        <a class="rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-teal-600 transition hover:text-teal-600/75" href="{{ route('register') }}">
+                            Register
+                        </a>
+                    </div>
+                    <button class="sm:hidden p-2 text-gray-600 hover:text-gray-700" onclick="toggleMenu()">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
             </div>
         </div>
         <div id="mobile-menu" class="px-4 py-2 hidden sm:hidden">
@@ -98,16 +110,15 @@
                 <li>
                     <a href="#" class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700">Jaunumi</a>
                 </li>
-
+                <li>
+                    <a href="#" class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700">Balvu programma</a>
+                </li>
                 <li>
                     <a href="#" class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700">Līzings</a>
                 </li>
 
                 <li>
                     <a href="#" class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700">Garantija</a>
-                </li>
-                <li>
-                    <a href="#" class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700">Piegāde</a>
                 </li>
                 <li>
                     <a href="#" class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700">Kontakti</a>
@@ -121,14 +132,12 @@
             <aside id="sidebar" class="w-1/4 bg-white p-4 shadow hidden lg:block">
                 <div class="flex h-screen flex-col justify-between border-e bg-white">
                     <div class="px-4 py-6">
-                        <ul class="mt-6 space-y-1">
-                            <li>
-                                <a href="#" class="block rounded-lg bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700">General</a>
-                            </li>
-                            <li>
+                        <!-- Product Categories -->
+                        <ul id="categoryList" class="mt-6 space-y-1">
+                            <li data-category="Datori">
                                 <details class="group [&_summary::-webkit-details-marker]:hidden">
                                     <summary class="flex cursor-pointer items-center justify-between rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700">
-                                        <span class="text-sm font-medium">Teams</span>
+                                        <span class="text-sm font-medium">Datori</span>
                                         <span class="shrink-0 transition duration-300 group-open:-rotate-180">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                                                 <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
@@ -136,25 +145,18 @@
                                         </span>
                                     </summary>
                                     <ul class="mt-2 space-y-1 px-4">
-                                        <li>
-                                            <a href="#" class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700">Banned Users</a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700">Calendar</a>
-                                        </li>
+                                        <li><a href="#" class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700">Personālie datori</a></li>
+                                        <li><a href="#" class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700">Portatīvie datori</a></li>
+                                        <li><a href="#" class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700">Planšetdatori</a></li>
+                                        <li><a href="#" class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700">E-grāmatu lasītāji</a></li>
+                                        <li><a href="#" class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700">Serveri</a></li>
                                     </ul>
                                 </details>
                             </li>
-                            <li>
-                                <a href="#" class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700">Billing</a>
-                            </li>
-                            <li>
-                                <a href="#" class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700">Invoices</a>
-                            </li>
-                            <li>
+                            <li data-category="Datora komponentes">
                                 <details class="group [&_summary::-webkit-details-marker]:hidden">
                                     <summary class="flex cursor-pointer items-center justify-between rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700">
-                                        <span class="text-sm font-medium">Account</span>
+                                        <span class="text-sm font-medium">Datora komponentes</span>
                                         <span class="shrink-0 transition duration-300 group-open:-rotate-180">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                                                 <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
@@ -162,19 +164,199 @@
                                         </span>
                                     </summary>
                                     <ul class="mt-2 space-y-1 px-4">
-                                        <li>
-                                            <a href="#" class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700">Details</a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700">Security</a>
-                                        </li>
-                                        <li>
-                                            <form action="#">
-                                                <button type="submit" class="w-full rounded-lg px-4 py-2 text-sm font-medium text-gray-500 [text-align:_inherit] hover:bg-gray-100 hover:text-gray-700">
-                                                    Logout
-                                                </button>
-                                            </form>
-                                        </li>
+                                        <li><a href="#" class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700">Barošanas bloki (PSU)</a></li>
+                                        <li><a href="#" class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700">Cietie diski (HDD 2.5")</a></li>
+                                        <li><a href="#" class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700">Cietie diski (HDD 3.5")</a></li>
+                                        <li><a href="#" class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700">Cietie diski (SSD)</a></li>
+                                    </ul>
+                                </details>
+                            </li>
+                            <li data-category="Datora konfigurators">
+                                <details class="group [&_summary::-webkit-details-marker]:hidden">
+                                    <summary class="flex cursor-pointer items-center justify-between rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700">
+                                        <span class="text-sm font-medium">Datora konfigurators</span>
+                                        <span class="shrink-0 transition duration-300 group-open:-rotate-180">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                                            </svg>
+                                        </span>
+                                    </summary>
+                                    <ul class="mt-2 space-y-1 px-4">
+                                        <li><a href="#" class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700">Savēja Konfiguracija</a></li>
+                                        <li><a href="#" class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700">Lietotāju Konfiguracija</a></li>
+                                    </ul>
+                                </details>
+                            </li>
+                            <li data-category="Monitori/Video tehnika">
+                                <details class="group [&_summary::-webkit-details-marker]:hidden">
+                                    <summary class="flex cursor-pointer items-center justify-between rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700">
+                                        <span class="text-sm font-medium">Monitori/Video tehnika</span>
+                                        <span class="shrink-0 transition duration-300 group-open:-rotate-180">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                                            </svg>
+                                        </span>
+                                    </summary>
+                                    <ul class="mt-2 space-y-1 px-4">
+                                        <li><a href="#" class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700">LCD Monitori</a></li>
+                                        <li><a href="#" class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700">Projektori</a></li>
+                                        <li><a href="#" class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700">Lielformāta displeji (LFD)</a></li>
+                                        <li><a href="#" class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700">Televizori</a></li>
+                                    </ul>
+                                </details>
+                            </li>
+                            <li data-category="Datoru ierīces">
+                                <details class="group [&_summary::-webkit-details-marker]:hidden">
+                                    <summary class="flex cursor-pointer items-center justify-between rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700">
+                                        <span class="text-sm font-medium">Datoru ierīces</span>
+                                        <span class="shrink-0 transition duration-300 group-open:-rotate-180">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                                            </svg>
+                                        </span>
+                                    </summary>
+                                    <ul class="mt-2 space-y-1 px-4">
+                                        <li><a href="#" class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700">Klaviatūras</a></li>
+                                        <li><a href="#" class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700">Peles</a></li>
+                                        <li><a href="#" class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700">Spēļu kontrolieri</a></li>
+                                    </ul>
+                                </details>
+                            </li>
+                            <li data-category="Spēļu konsoles">
+                                <details class="group [&_summary::-webkit-details-marker]:hidden">
+                                    <summary class="flex cursor-pointer items-center justify-between rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700">
+                                        <span class="text-sm font-medium">Spēļu konsoles</span>
+                                        <span class="shrink-0 transition duration-300 group-open:-rotate-180">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                                            </svg>
+                                        </span>
+                                    </summary>
+                                    <ul class="mt-2 space-y-1 px-4">
+                                        <li><a href="#" class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700">PlayStation</a></li>
+                                        <li><a href="#" class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700">Xbox</a></li>
+                                        <li><a href="#" class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700">Nintendo</a></li>
+                                    </ul>
+                                </details>
+                            </li>
+                            <li data-category="Spēles">
+                                <details class="group [&_summary::-webkit-details-marker]:hidden">
+                                    <summary class="flex cursor-pointer items-center justify-between rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700">
+                                        <span class="text-sm font-medium">Spēles</span>
+                                        <span class="shrink-0 transition duration-300 group-open:-rotate-180">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                                            </svg>
+                                        </span>
+                                    </summary>
+                                    <ul class="mt-2 space-y-1 px-4">
+                                        <li><a href="#" class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700">Steam</a></li>
+                                        <li><a href="#" class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700">PlayStation</a></li>
+                                        <li><a href="#" class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700">Xbox</a></li>
+                                        <li><a href="#" class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700">Nintendo</a></li>
+                                    </ul>
+                                </details>
+                            </li>
+                            <li data-category="Dator Programmatūra">
+                                <details class="group [&_summary::-webkit-details-marker]:hidden">
+                                    <summary class="flex cursor-pointer items-center justify-between rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700">
+                                        <span class="text-sm font-medium">Dator Programmatūra</span>
+                                        <span class="shrink-0 transition duration-300 group-open:-rotate-180">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                                            </svg>
+                                        </span>
+                                    </summary>
+                                    <ul class="mt-2 space-y-1 px-4">
+                                        <li><a href="#" class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700">Operētājsistēmas</a></li>
+                                        <li><a href="#" class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700">Biroja programmatūra</a></li>
+                                        <li><a href="#" class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700">Datu aizsardzības programmatūra</a></li>
+                                        <li><a href="#" class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700">Serveru programmatūra</a></li>
+                                    </ul>
+                                </details>
+                            </li>
+                            <li data-category="Video ierīces">
+                                <details class="group [&_summary::-webkit-details-marker]:hidden">
+                                    <summary class="flex cursor-pointer items-center justify-between rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700">
+                                        <span class="text-sm font-medium">Video ierīces</span>
+                                        <span class="shrink-0 transition duration-300 group-open:-rotate-180">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                                            </svg>
+                                        </span>
+                                    </summary>
+                                    <ul class="mt-2 space-y-1 px-4">
+                                        <li><a href="#" class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700">Digitālās kameras</a></li>
+                                        <li><a href="#" class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700">Webkameras</a></li>
+                                        <li><a href="#" class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700">Sporta kameras</a></li>
+                                    </ul>
+                                </details>
+                            </li>
+                            <li data-category="Audio">
+                                <details class="group [&_summary::-webkit-details-marker]:hidden">
+                                    <summary class="flex cursor-pointer items-center justify-between rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700">
+                                        <span class="text-sm font-medium">Audio</span>
+                                        <span class="shrink-0 transition duration-300 group-open:-rotate-180">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                                            </svg>
+                                        </span>
+                                    </summary>
+                                    <ul class="mt-2 space-y-1 px-4">
+                                        <li><a href="#" class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700">Mikrofoni</a></li>
+                                        <li><a href="#" class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700">Austiņas</a></li>
+                                        <li><a href="#" class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700">Skaļruņi</a></li>
+                                    </ul>
+                                </details>
+                            </li>
+                            <li data-category="Datortīkli">
+                                <details class="group [&_summary::-webkit-details-marker]:hidden">
+                                    <summary class="flex cursor-pointer items-center justify-between rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700">
+                                        <span class="text-sm font-medium">Datortīkli</span>
+                                        <span class="shrink-0 transition duration-300 group-open:-rotate-180">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                                            </svg>
+                                        </span>
+                                    </summary>
+                                    <ul class="mt-2 space-y-1 px-4">
+                                        <li><a href="#" class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700">Tīkla kartes</a></li>
+                                        <li><a href="#" class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700">Komutatori (Switch)</a></li>
+                                        <li><a href="#" class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700">Maršrutētāji</a></li>
+                                    </ul>
+                                </details>
+                            </li>
+                            <li data-category="Serveru komponentes">
+                                <details class="group [&_summary::-webkit-details-marker]:hidden">
+                                    <summary class="flex cursor-pointer items-center justify-between rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700">
+                                        <span class="text-sm font-medium">Serveru komponentes</span>
+                                        <span class="shrink-0 transition duration-300 group-open:-rotate-180">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                                            </svg>
+                                        </span>
+                                    </summary>
+                                    <ul class="mt-2 space-y-1 px-4">
+                                        <li><a href="#" class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700">Serveri (Brand)</a></li>
+                                        <li><a href="#" class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700">Serveru procesori</a></li>
+                                        <li><a href="#" class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700">Serveru operatīvā atmiņa</a></li>
+                                    </ul>
+                                </details>
+                            </li>
+                            <li data-category="Aksesuāri">
+                                <details class="group [&_summary::-webkit-details-marker]:hidden">
+                                    <summary class="flex cursor-pointer items-center justify-between rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700">
+                                        <span class="text-sm font-medium">Aksesuāri</span>
+                                        <span class="shrink-0 transition duration-300 group-open:-rotate-180">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                                            </svg>
+                                        </span>
+                                    </summary>
+                                    <ul class="mt-2 space-y-1 px-4">
+                                        <li><a href="#" class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700">Aksesuāri pelēm un klaviatūrām</a></li>
+                                        <li><a href="#" class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700">Peļu paliktņi</a></li>
+                                        <li><a href="#" class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700">Portatīvo datoru aksesuāri</a></li>
                                     </ul>
                                 </details>
                             </li>
@@ -189,7 +371,7 @@
                 </div>
                 <div class="mt-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                     <!-- Example of a product item -->
-                    <div class="bg-white p-4 shadow">
+                    <div class="bg-white p-4 shadow product-item" data-category="Datori">
                         <img src="/path/to/product/image.png" alt="Product" class="w-full h-32 object-cover">
                         <h3 class="mt-2 text-lg font-bold">Product Name</h3>
                         <p class="text-gray-700">$100.00</p>
@@ -201,132 +383,83 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-gray-900 text-gray-400">
+    <footer class="bg-gray-300 text-neutral-800">
         <div class="container mx-auto px-4 py-8">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                 <!-- Trustpilot Section -->
                 <div class="space-y-4 text-center md:text-left footer-section">
                     <img src="https://www.trustpilot.com/assets/home/logos/trustpilot-logo.svg" alt="Trustpilot" class="h-12 mx-auto md:mx-0">
-                    <div class="flex justify-center md:justify-start">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/6/62/Trustpilot_star.png" alt="Stars" class="h-6">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/6/62/Trustpilot_star.png" alt="Stars" class="h-6">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/6/62/Trustpilot_star.png" alt="Stars" class="h-6">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/6/62/Trustpilot_star.png" alt="Stars" class="h-6">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/6/62/Trustpilot_star.png" alt="Stars" class="h-6">
-                    </div>
-                    <p class="text-sm">1111 Reviews</p>
-                    <p class="text-sm">CHOOSE YOUR SHOPS SAFELY WITH ALLKEYSHOP</p>
+                    <p class="text-sm text-neutral-900 font-bold">DROŠI REALIZE SAVUS SAPNI AR GOGAMES</p>
                 </div>
-                <!-- Official and Keysellers Section -->
+                <!-- Best choice for search your dream -->
                 <div class="space-y-4 text-center md:text-left footer-section">
                     <div class="flex justify-center md:justify-start">
-                        <img src="https://img.icons8.com/ios/50/000000/shopping-cart.png" alt="Official and Keysellers" class="h-12 mx-auto md:mx-0">
+                        <img src="https://img.icons8.com/ios/50/000000/shopping-cart.png" alt="Best choice for Search your dream" class="h-12 mx-auto md:mx-0">
                     </div>
-                    <h3 class="text-white font-bold">OFFICIAL AND KEYSELLERS</h3>
-                    <p class="text-sm">We have selected more than 71 official dealers and keysellers to create the largest price comparison database specialized in video games.</p>
+                    <h3 class="text-neutral-900 font-bold">LABĀKĀ IZVĒLE, LAI MEKLĒTU SAVU SAPNI</h3>
+                    <p class="text-sm">Mums ir vairāk nekā 71 oficiāls partneris un pārdevēji, lai izveidotu lielāko cenu salīdzināšanas datubāzi, kas specializējas komforta meklēšanā.</p>
                 </div>
                 <!-- Market Best Prices Section -->
                 <div class="space-y-4 text-center md:text-left footer-section">
                     <div class="flex justify-center md:justify-start">
                         <img src="https://img.icons8.com/ios/50/000000/price-tag.png" alt="Market Best Prices" class="h-12 mx-auto md:mx-0">
                     </div>
-                    <h3 class="text-white font-bold">MARKET BEST PRICES</h3>
-                    <p class="text-sm">With 159697 games, we strive to find and maintain the best prices. Explore our accurate listings and use coupons to maximize your savings.</p>
+                    <h3 class="text-neutral-900 font-bold">TIRGUS LABĀKĀS CENAS</h3>
+                    <p class="text-sm">Pārbaudiet, meklējiet, izvēlieties labākos piedāvājumus no mūsu plašās preču izvēles.</p>
                 </div>
-                <!-- Buyer Protection Section -->
-                <div class="space-y-4 text-center md:text-left">
+                <!-- Support For 24/7 Section -->
+                <div class="space-y-4 text-center md:text-left footer-section">
                     <div class="flex justify-center md:justify-start">
-                        <img src="https://img.icons8.com/ios/50/000000/shield.png" alt="Buyer Protection" class="h-12 mx-auto md:mx-0">
+                        <img src="https://img.icons8.com/ios/50/000000/phone-not-being-used.png" alt="Support for 24/7" class="h-12 mx-auto md:mx-0">
                     </div>
-                    <h3 class="text-white font-bold">BUYER PROTECTION</h3>
-                    <p class="text-sm">At Allkeyshop you are our priority. Therefore it is important that you always get the product you bought in the proper timeframe.</p>
+                    <h3 class="text-neutral-900 font-bold">ATBALSTS 24/7</h3>
+                    <p class="text-sm">Saņemiet atbalstu jebkurā diennakts laikā. Mēs esam šeit, lai palīdzētu jums visu diennakti.</p>
                 </div>
             </div>
-            <div class="mt-8 border-t border-gray-700 pt-8">
-                <div class="grid grid-cols-1 md:grid-cols-5 gap-8">
-                    <!-- Need Help Section -->
-                    <div class="space-y-4 text-center md:text-left footer-section">
-                        <h3 class="text-white font-bold">NEED HELP ?</h3>
-                        <ul class="space-y-1">
-                            <li><a href="#" class="hover:text-white">About Us ?</a></li>
-                            <li><a href="#" class="hover:text-white">How Allkeyshop works ?</a></li>
-                            <li><a href="#" class="hover:text-white">Why are prices so low?</a></li>
-                            <li><a href="#" class="hover:text-white">The key I bought doesn’t work ?</a></li>
-                            <li><a href="#" class="hover:text-white">How to activate your CDKey ?</a></li>
-                            <li><a href="#" class="hover:text-white">FAQs ?</a></li>
-                            <li><a href="#" class="hover:text-white">Allkeyshop Extension ?</a></li>
-                        </ul>
-                    </div>
-                    <!-- Partnership Section -->
-                    <div class="space-y-4 text-center md:text-left footer-section">
-                        <h3 class="text-white font-bold">PARTNERSHIP</h3>
-                        <ul class="space-y-1">
-                            <li><a href="#" class="hover:text-white">Twitch/Kick</a></li>
-                            <li><a href="#" class="hover:text-white">Website</a></li>
-                            <li><a href="#" class="hover:text-white">Youtube</a></li>
-                            <li><a href="#" class="hover:text-white">Merchants</a></li>
-                        </ul>
-                    </div>
-                    <!-- Categories Section -->
-                    <div class="space-y-4 text-center md:text-left footer-section">
-                        <h3 class="text-white font-bold">CATEGORIES</h3>
-                        <ul class="space-y-1">
-                            <li><a href="#" class="hover:text-white">PC</a></li>
-                            <li><a href="#" class="hover:text-white">Xbox</a></li>
-                            <li><a href="#" class="hover:text-white">Playstation</a></li>
-                            <li><a href="#" class="hover:text-white">Nintendo</a></li>
-                            <li><a href="#" class="hover:text-white">Reward Program</a></li>
-                            <li><a href="#" class="hover:text-white">Gift Cards</a></li>
-                            <li><a href="#" class="hover:text-white">Deals / Free</a></li>
-                            <li><a href="#" class="hover:text-white">Store Reviews</a></li>
-                            <li><a href="#" class="hover:text-white">Top Games 2024</a></li>
-                            <li><a href="#" class="hover:text-white">AKS Merch USA</a></li>
-                            <li><a href="#" class="hover:text-white">AKS Merch EUROPE</a></li>
-                        </ul>
-                    </div>
-                    <!-- Newsletter Section -->
-                    <div class="space-y-4 text-center md:text-left">
-                        <h3 class="text-white font-bold">NEWSLETTER</h3>
-                        <form class="flex space-x-2">
-                            <input type="email" placeholder="Enter your email" class="w-full px-4 py-2 rounded bg-gray-800 text-white border border-gray-700 focus:border-white focus:ring-2 focus:ring-white">
-                            <button class="px-4 py-2 rounded bg-blue-600 hover:bg-blue-700 text-white">Subscribe</button>
-                        </form>
-                        <p class="text-xs">Subscribe to the Allkeyshop's newsletter and get the Best Deals, Free Game and Coupons.</p>
-                    </div>
-                </div>
-                <div class="mt-8 text-center">
-                    <p>Terms of Service - Privacy Policy Allkeyshop.com - Contact Us - Career - Allkeyshop Foundation - Copyright © 2024 Allkeyshop</p>
-                    <div class="mt-4 flex justify-center space-x-4">
-                        <a href="#" class="hover:text-white"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="hover:text-white"><i class="fab fa-facebook"></i></a>
-                        <a href="#" class="hover:text-white"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="hover:text-white"><i class="fab fa-youtube"></i></a>
-                        <a href="#" class="hover:text-white"><i class="fab fa-discord"></i></a>
-                    </div>
-                </div>
+            <div class="mt-8 text-center text-sm text-neutral-600">
+                &copy; 2023 GoGames. All rights reserved.
             </div>
         </div>
     </footer>
-
-    <!-- Font Awesome for social media icons -->
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous">
-        function handleResize() {
-            const topContainer = document.getElementById('top-container');
-            if (window.innerWidth < 1060) {  // Adjust the width as needed
-                topContainer.classList.add('hidden-custom');
-            } else {
-                topContainer.classList.remove('hidden-custom');
-            }
+    <script>
+        function selectCategory(category) {
+            // Hide all categories
+            document.querySelectorAll('#categoryList details').forEach(detail => {
+                if (detail.getAttribute('open') !== null) {
+                    detail.removeAttribute('open');
+                }
+            });
+            // Show the selected category
+            document.querySelector(`#categoryList li[data-category="${category}"] details`).setAttribute('open', 'open');
+            // Show relevant products
+            document.querySelectorAll('.product-item').forEach(product => {
+                product.classList.add('hidden-custom');
+                if (product.getAttribute('data-category') === category) {
+                    product.classList.remove('hidden-custom');
+                }
+            });
         }
+
+        document.querySelectorAll('#categoryList summary').forEach(summary => {
+            summary.addEventListener('click', function () {
+                const category = this.parentElement.getAttribute('data-category');
+                if (this.parentElement.hasAttribute('open')) {
+                    // Toggle off the category and show all products
+                    this.parentElement.removeAttribute('open');
+                    document.querySelectorAll('.product-item').forEach(product => {
+                        product.classList.remove('hidden-custom');
+                    });
+                } else {
+                    selectCategory(category);
+                }
+            });
+        });
 
         function toggleMenu() {
             const menu = document.getElementById('mobile-menu');
             menu.classList.toggle('hidden');
         }
-
-        window.addEventListener('resize', handleResize);
-        window.addEventListener('load', handleResize);
     </script>
 </body>
-</html>
 
+</html>
