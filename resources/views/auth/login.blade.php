@@ -135,6 +135,7 @@
             line-height: 30px;
             outline: none !important;
             width: 100%;
+            cursor: pointer;
         }
         button::-moz-focus-inner { 
             border: 0; 
@@ -181,6 +182,13 @@
             <div class="left">
                 <div class="login">{{ __('Login') }}</div>
                 <div class="eula">By logging in you agree to the ridiculously long terms that you didn't bother to read</div>
+            
+                <div class="flex items-center justify-between mt-2">
+                    <label for="remember_me" class="inline-flex items-center">
+                        <input id="remember_me" type="checkbox" class="form-checkbox" name="remember">
+                        <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
+                    </label>
+                </div>
             </div>
             <div class="right">
                 <svg viewBox="0 0 320 300">
@@ -212,7 +220,7 @@
                         </div>
 
                         <div>
-                            <button type="submit" id="submit" value="Submit">{{ __('Log in') }}</button>
+                            <button type="submit" id="submit">{{ __('Log in') }}</button>
                         </div>
                     </form>
 
@@ -223,15 +231,10 @@
                             </svg>
                         </a>
                     </div>
-
                 </div>
             </div>
         </div>
     </div>
-    <form id="myForm" class="mt-8 grid grid-cols-6 gap-6" method="GET" action="/">
-
-    </form>
-
     <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
     <script>
         var current = null;
@@ -295,3 +298,4 @@
     </script>
 </body>
 </html>
+

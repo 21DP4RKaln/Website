@@ -28,7 +28,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->route('profile.edit'); // Перенаправление на страницу профиля
+        return redirect()->intended(route('dashboard', absolute: false));
     }
 
     /**

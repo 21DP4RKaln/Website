@@ -410,7 +410,7 @@
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                 <!-- Trustpilot Section -->
                 <div class="space-y-4 text-center md:text-left footer-section">
-                    <img src="https://www.trustpilot.com/assets/home/logos/trustpilot-logo.svg" alt="Trustpilot" class="h-12 mx-auto md:mx-0">
+                    <meta name="trustpilot-one-time-domain-verification-id" content="7cb31280-2870-402b-8220-f267eed611b1"/>
                     <p class="text-sm text-neutral-900 font-bold">DROŠI REALIZE SAVUS SAPNI AR GOGAMES</p>
                 </div>
                 <!-- Best choice for search your dream -->

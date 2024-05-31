@@ -4,20 +4,21 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
-use Illuminate\View\View;
 
 class RegisteredUserController extends Controller
 {
     /**
-     * Display the registration view.
+     * Show the registration form.
+     *
+     * @return \Illuminate\View\View
      */
-    public function create(): View
+    public function create()
     {
         return view('auth.register');
     }
@@ -25,36 +26,37 @@ class RegisteredUserController extends Controller
     /**
      * Handle an incoming registration request.
      *
-     * @throws \Illuminate\Validation\ValidationException
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request): RedirectResponse
+    public function store(Request $request)
     {
         $request->validate([
-            'nickname' => ['required', 'string', 'max:255'],
-            'first_name' => ['required', 'string', 'max:255'],
-            'last_name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'phone_number' => ['required', 'string', 'max:15', 'unique:users'],
+            'nickname' => 'required|string|max:255|unique:users',
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'phone_number' => 'required|string|max:15|unique:users',
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
-        try {
-            $user = User::create([
-                'name' => $request->first_name . ' ' . $request->last_name,
-                'nickname' => $request->nickname,
-                'first_name' => $request->first_name,
-                'last_name' => $request->last_name,
-                'email' => $request->email,
-                'phone_number' => $request->phone_number,
-                'password' => Hash::make($request->password),
-            ]);
+        $user = User::create([
+            'nickname' => $request->nickname,
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'email' => $request->email,
+            'phone_number' => $request->phone_number,
+            'password' => Hash::make($request->password),
+        ]);
 
-            event(new Registered($user));
-            Auth::login($user);
+        event(new Registered($user));
 
-            return redirect()->route('profile.edit'); // Перенаправление на страницу профиля
-        } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Failed to register user. Please try again.')->withErrors($e->getMessage());
-        }
+        Auth::login($user);
+
+        return redirect()->route('profile');
     }
 }
+
+
+
+
