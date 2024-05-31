@@ -14,53 +14,57 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.6/flowbite.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.x.x/dist/alpine.min.js" defer></script>
+    <style>
+        .hidden-custom {
+            display: none;
+        }
+
+        .border-separator {
+            border-bottom: 1px solid #ccc;
+        }
+
+        .footer-section {
+            border-right: 1px solid #444;
+        }
+
+        .footer-section:last-child {
+            border-right: none;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .product-item {
+            border: 1px solid #ccc;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+
+        .wheel-button {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            background-color: #ffbf00;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            padding: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .wheel-button:hover {
+            transform: scale(1.1);
+        }
+
+        .wheel-button img {
+            width: 40px;
+            height: 40px;
+        }
+    </style>
 </head>
-
-<style>
-    .hidden-custom {
-        display: none;
-    }
-
-    .border-separator {
-        border-bottom: 1px solid #ccc;
-    }
-
-    .footer-section {
-        border-right: 1px solid #444;
-    }
-
-    .footer-section:last-child {
-        border-right: none;
-    }
-
-    .hidden {
-        display: none;
-    }
-
-    .product-item {
-        border: 1px solid #ccc;
-        padding: 16px;
-        margin-bottom: 16px;
-    }
-
-    .chat-button {
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        background-color: #374151;
-        color: white;
-        padding: 10px 20px;
-        border-radius: 30px;
-        display: flex;
-        align-items: center;
-        cursor: pointer;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
-
-    .chat-button svg {
-        margin-right: 8px;
-    }
-</style>
 
 <body class="bg-gray-100">
     <!-- Top container -->
@@ -100,19 +104,19 @@
                         </button>
                     </div>
                 </div>
-                    <div class="flex items-center gap-4 hidden sm:flex">
-                        <a class="rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-teal-700" href="{{ route('login') }}">
-                            Login
-                        </a>
-                        <a class="rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-teal-600 transition hover:text-teal-600/75" href="{{ route('register') }}">
-                            Register
-                        </a>
-                    </div>
-                    <button class="sm:hidden p-2 text-gray-600 hover:text-gray-700" onclick="toggleMenu()">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                        </svg>
-                    </button>
+                <div class="flex items-center gap-4 hidden sm:flex">
+                    <a class="rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-teal-700" href="{{ route('login') }}">
+                        Login
+                    </a>
+                    <a class="rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-teal-600 transition hover:text-teal-600/75" href="{{ route('register') }}">
+                        Register
+                    </a>
+                </div>
+                <button class="sm:hidden p-2 text-gray-600 hover:text-gray-700" onclick="toggleMenu()">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
             </div>
         </div>
         <div id="mobile-menu" class="px-4 py-2 hidden sm:hidden">
@@ -158,7 +162,7 @@
                                         <span class="text-sm font-medium">Datori</span>
                                         <span class="shrink-0 transition duration-300 group-open:-rotate-180">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
                                             </svg>
                                         </span>
                                     </summary>
@@ -177,7 +181,7 @@
                                         <span class="text-sm font-medium">Datora komponentes</span>
                                         <span class="shrink-0 transition duration-300 group-open:-rotate-180">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
                                             </svg>
                                         </span>
                                     </summary>
@@ -229,7 +233,7 @@
                                         <span class="text-sm font-medium">Datoru ierīces</span>
                                         <span class="shrink-0 transition duration-300 group-open:-rotate-180">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
                                             </svg>
                                         </span>
                                     </summary>
@@ -263,7 +267,7 @@
                                         <span class="text-sm font-medium">Spēles</span>
                                         <span class="shrink-0 transition duration-300 group-open:-rotate-180">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
                                             </svg>
                                         </span>
                                     </summary>
@@ -281,7 +285,7 @@
                                         <span class="text-sm font-medium">Dator Programmatūra</span>
                                         <span class="shrink-0 transition duration-300 group-open:-rotate-180">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
                                             </svg>
                                         </span>
                                     </summary>
@@ -299,7 +303,7 @@
                                         <span class="text-sm font-medium">Video ierīces</span>
                                         <span class="shrink-0 transition duration-300 group-open:-rotate-180">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
                                             </svg>
                                         </span>
                                     </summary>
@@ -316,7 +320,7 @@
                                         <span class="text-sm font-medium">Audio</span>
                                         <span class="shrink-0 transition duration-300 group-open:-rotate-180">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
                                             </svg>
                                         </span>
                                     </summary>
@@ -367,7 +371,7 @@
                                         <span class="text-sm font-medium">Aksesuāri</span>
                                         <span class="shrink-0 transition duration-300 group-open:-rotate-180">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
                                             </svg>
                                         </span>
                                     </summary>
@@ -441,14 +445,25 @@
         </div>
     </footer>
 
-    <!-- Chat Support Button -->
-    <div class="chat-button" onclick="openChat()">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
-        </svg>
-        <span>Help</span>
-    </div>
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+    (function(){
+    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+    s1.async=true;
+    s1.src='https://embed.tawk.to/665725949a809f19fb36a1b7/1hv26lj07';
+    s1.charset='UTF-8';
+    s1.setAttribute('crossorigin','*');
+    s0.parentNode.insertBefore(s1,s0);
+    })();
+    </script>
+    <!--End of Tawk.to Script-->
 
+    <!--
+    <button class="wheel-button" onclick="window.location.href='/reward-program'">
+        <img src="https://img.icons8.com/ios-filled/50/FFFFFF/fortune-wheel.png" alt="Fortuna Wheel">
+    </button> 
+    -->
     <script>
         function selectCategory(category) {
             // Hide all categories
@@ -486,11 +501,6 @@
         function toggleMenu() {
             const menu = document.getElementById('mobile-menu');
             menu.classList.toggle('hidden');
-        }
-
-        function openChat() {
-            // Function to open the chat support
-            alert('Chat support coming soon!');
         }
     </script>
 </body>
