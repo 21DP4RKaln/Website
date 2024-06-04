@@ -39,33 +39,33 @@
 <body class="bg-gray-900 text-white">
 
     <div class="profile-header">
-        <img src="path/to/your/avatar.jpg" alt="Profile Avatar" class="rounded-full mx-auto w-24">
-        <h1 class="text-3xl mt-2">Username</h1>
-        <p class="text-gray-400">No information given.</p>
+        <img src="{{ $user->avatar_url ?? 'path/to/default/avatar.jpg' }}" alt="Profile Avatar" class="rounded-full mx-auto w-24">
+        <h1 class="text-3xl mt-2">{{ $user->username }}</h1>
+        <p class="text-gray-400">{{ $user->bio ?? 'No information given.' }}</p>
     </div>
 
     <div class="flex">
         <div class="profile-sidebar w-1/4 p-4">
             <h2 class="text-xl mb-4">Currently Online</h2>
             <ul class="space-y-2">
-                <li>Friend 1</li>
-                <li>Friend 2</li>
-                <li>Friend 3</li>
-                <!-- Add more friends as needed -->
+                @forelse ($user->friends_online as $friend)
+                    <li>{{ $friend->name }}</li>
+                @empty
+                    <li>No friends online</li>
+                @endforelse
             </ul>
         </div>
 
         <div class="profile-main flex-grow p-4">
             <h2 class="text-2xl mb-4">Recent Activity</h2>
-            <div class="activity-item">
-                <h3 class="text-xl">Game Title</h3>
-                <p>Last played on 20 May</p>
-            </div>
-            <div class="activity-item">
-                <h3 class="text-xl">Game Title</h3>
-                <p>Last played on 20 May</p>
-            </div>
-            <!-- Add more activity items as needed -->
+            @forelse ($user->activities as $activity)
+                <div class="activity-item">
+                    <h3 class="text-xl">{{ $activity->game_title }}</h3>
+                    <p>Last played on {{ $activity->last_played_at->format('d M') }}</p>
+                </div>
+            @empty
+                <p>No recent activity</p>
+            @endforelse
         </div>
     </div>
 
