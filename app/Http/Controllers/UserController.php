@@ -4,9 +4,22 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class ProfileController extends Controller
+class UserController extends Controller
 {
-    public function show()
+    public function home()
+    {
+        $user = auth()->user();
+        if (!$user) {
+            return redirect()->route('login'); // Ensure the user is authenticated
+        }
+
+        $sellingItems = $user->sellingItems()->latest()->take(3)->get();
+        $wishListItems = $user->wishListItems()->latest()->take(3)->get();
+
+        return view('home', compact('user', 'sellingItems', 'wishListItems'));
+    }
+
+    public function profile()
     {
         $user = auth()->user();
         $sellingItems = $user->sellingItems()->latest()->take(3)->get();
@@ -34,10 +47,6 @@ class ProfileController extends Controller
         // Logic to link account with provider (Facebook, Google, etc.)
     }
 }
-
-
-
-
 
 
 

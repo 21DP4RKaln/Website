@@ -105,12 +105,18 @@
                     </div>
                 </div>
                 <div class="flex items-center gap-4 hidden sm:flex">
-                    <a class="rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-teal-700" href="{{ route('login') }}">
-                        Login
-                    </a>
-                    <a class="rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-teal-600 transition hover:text-teal-600/75" href="{{ route('register') }}">
-                        Register
-                    </a>
+                    @auth
+                        <a class="rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-teal-700" href="{{ route('profile') }}">
+                            Profile
+                        </a>
+                    @else
+                        <a class="rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-teal-700" href="{{ route('login') }}">
+                            Login
+                        </a>
+                        <a class="rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-teal-600 transition hover:text-teal-600/75" href="{{ route('register') }}">
+                            Register
+                        </a>
+                    @endauth
                 </div>
                 <button class="sm:hidden p-2 text-gray-600 hover:text-gray-700" onclick="toggleMenu()">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -121,14 +127,18 @@
         </div>
         <div id="mobile-menu" class="px-4 py-2 hidden sm:hidden">
             <ul class="space-y-1">
-                <li>
-                    <a href="{{ route('login') }}" class="block rounded-lg bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700">Login</a>
-                </li>
-
-                <li>
-                    <a href="{{ route('register') }}" class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700">Register</a>
-                </li>
-
+                @auth
+                    <li>
+                        <a href="{{ route('profile') }}" class="block rounded-lg bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700">Profile</a>
+                    </li>
+                @else
+                    <li>
+                        <a href="{{ route('login') }}" class="block rounded-lg bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700">Login</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('register') }}" class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700">Register</a>
+                    </li>
+                @endauth
                 <li>
                     <a href="#" class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700">Jaunumi</a>
                 </li>
@@ -138,7 +148,6 @@
                 <li>
                     <a href="#" class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700">Līzings</a>
                 </li>
-
                 <li>
                     <a href="#" class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700">Garantija</a>
                 </li>
@@ -199,7 +208,7 @@
                                         <span class="text-sm font-medium">Datora konfigurators</span>
                                         <span class="shrink-0 transition duration-300 group-open:-rotate-180">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
                                             </svg>
                                         </span>
                                     </summary>
@@ -473,7 +482,6 @@
         }
     </style>
 
-
     <!--Start of Tawk.to Script-->
     <script type="text/javascript">
     var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
@@ -488,11 +496,6 @@
     </script>
     <!--End of Tawk.to Script-->
 
-    <!--
-    <button class="wheel-button" onclick="window.location.href='/reward-program'">
-        <img src="https://img.icons8.com/ios-filled/50/FFFFFF/fortune-wheel.png" alt="Fortuna Wheel">
-    </button> 
-    -->
     <script>
         function selectCategory(category) {
             // Hide all categories
@@ -535,3 +538,5 @@
 </body>
 
 </html>
+
+

@@ -142,12 +142,18 @@
                     </div>
                 </div>
                 <div class="flex items-center gap-4 hidden sm:flex">
-                    <a class="rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-teal-700" href="{{ route('login') }}">
-                        Login
-                    </a>
-                    <a class="rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-teal-600 transition hover:text-teal-600/75" href="{{ route('register') }}">
-                        Register
-                    </a>
+                    @auth
+                        <a class="rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-teal-700" href="{{ route('profile') }}">
+                            Profile
+                        </a>
+                    @else
+                        <a class="rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-teal-700" href="{{ route('login') }}">
+                            Login
+                        </a>
+                        <a class="rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-teal-600 transition hover:text-teal-600/75" href="{{ route('register') }}">
+                            Register
+                        </a>
+                    @endauth
                 </div>
                 <button class="sm:hidden p-2 text-gray-600 hover:text-gray-700" onclick="toggleMenu()">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -158,14 +164,18 @@
         </div>
         <div id="mobile-menu" class="px-4 py-2 hidden sm:hidden">
             <ul class="space-y-1">
-                <li>
-                    <a href="{{ route('login') }}" class="block rounded-lg bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700">Login</a>
-                </li>
-
-                <li>
-                    <a href="{{ route('register') }}" class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700">Register</a>
-                </li>
-
+                @auth
+                    <li>
+                        <a href="{{ route('profile') }}" class="block rounded-lg bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700">Profile</a>
+                    </li>
+                @else
+                    <li>
+                        <a href="{{ route('login') }}" class="block rounded-lg bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700">Login</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('register') }}" class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700">Register</a>
+                    </li>
+                @endauth
                 <li>
                     <a href="#" class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700">Jaunumi</a>
                 </li>
@@ -175,7 +185,6 @@
                 <li>
                     <a href="#" class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700">Līzings</a>
                 </li>
-
                 <li>
                     <a href="#" class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700">Garantija</a>
                 </li>
@@ -187,29 +196,29 @@
     </header>
 
     <main class="container mx-auto px-4 py-6">
-    <div class="main-content container mx-auto px-4 py-6">
-        <div class="content">
-            <div class="main">
-                <div class="wheel-container">
-                    <h2 class="text-2xl font-bold mb-4">ALLKEYSHOP REWARD PROGRAM</h2>
-                    <p>Once a day, you can spin the wheel of fortune and have a 100% chance to win a prize.</p>
-                    <div class="wheel" id="wheel" data-prize-count="{{ $prizes->count() }}">
-                        @foreach ($prizes as $index => $prize)
-                            <div class="segment" style="transform: rotate({{ $index * (360 / $prizes->count()) }}deg);">
-                                <img src="{{ asset('storage/' . $prize->image) }}" alt="{{ $prize->name }}">
-                            </div>
-                        @endforeach
+        <div class="main-content container mx-auto px-4 py-6">
+            <div class="content">
+                <div class="main">
+                    <div class="wheel-container">
+                        <h2 class="text-2xl font-bold mb-4">ALLKEYSHOP REWARD PROGRAM</h2>
+                        <p>Once a day, you can spin the wheel of fortune and have a 100% chance to win a prize.</p>
+                        <div class="wheel" id="wheel" data-prize-count="{{ $prizes->count() }}">
+                            @foreach ($prizes as $index => $prize)
+                                <div class="segment" style="transform: rotate({{ $index * (360 / $prizes->count()) }}deg);">
+                                    <img src="{{ asset('storage/' . $prize->image) }}" alt="{{ $prize->name }}">
+                                </div>
+                            @endforeach
+                        </div>
+                        <div class="button-container">
+                            <button class="spin-button" id="spinButton">Spin</button>
+                        </div>
+                        <div class="results" id="results"></div>
                     </div>
-                    <div class="button-container">
-                        <button class="spin-button" id="spinButton">Spin</button>
-                    </div>
-                    <div class="results" id="results"></div>
                 </div>
-            </div>
                 <!-- Sidebar content -->
                 <aside class="sidebar">
-                    <img src="https://path.to/your/sidebar-image.png" alt="Sidebar Image">
-                    <img src="https://path.to/another/sidebar-image.png" alt="Sidebar Image">
+                    <img src="{{ asset('images/sidebar-image.png') }}" alt="Sidebar Image">
+                    <img src="{{ asset('images/another-sidebar-image.png') }}" alt="Sidebar Image">
                     <!-- Add more sidebar content as needed -->
                 </aside>
             </div>
@@ -269,26 +278,36 @@
     </footer>
 
     <script>
-        document.querySelector('#spinButton').addEventListener('click', function () {
+        document.addEventListener("DOMContentLoaded", function() {
             const wheel = document.querySelector('#wheel');
             const results = document.querySelector('#results');
             const prizeCount = wheel.getAttribute('data-prize-count');
-            const randomDegree = Math.floor(Math.random() * 360);
-            const rotation = 360 * 5 + randomDegree; // 5 full rotations + random degree
-            wheel.style.transition = 'transform 5s ease-out';
-            wheel.style.transform = `rotate(${rotation}deg)`;
 
-            // Clear previous result
-            results.innerHTML = '';
+            if (prizeCount > 0) {
+                const randomDegree = Math.floor(Math.random() * 360);
+                const rotation = 360 * 5 + randomDegree; // 5 full rotations + random degree
+                wheel.style.transition = 'transform 5s ease-out';
+                wheel.style.transform = `rotate(${rotation}deg)`;
 
-            // Logic to handle the result after spinning
-            wheel.addEventListener('transitionend', function () {
-                const actualDegree = rotation % 360;
-                const prizeIndex = Math.floor((actualDegree + (360 / prizeCount) / 2) / (360 / prizeCount)) % prizeCount;
-                const prizeName = @json($prizes->pluck('name'))[prizeIndex];
+                document.querySelector('#spinButton').addEventListener('click', function () {
+                    // Clear previous result
+                    results.innerHTML = '';
 
-                results.innerHTML = `Congratulations! You won ${prizeName}`;
-            }, { once: true });
+                    // Spin the wheel
+                    wheel.style.transform = `rotate(${rotation}deg)`;
+
+                    // Logic to handle the result after spinning
+                    wheel.addEventListener('transitionend', function () {
+                        const actualDegree = rotation % 360;
+                        const prizeIndex = Math.floor((actualDegree + (360 / prizeCount) / 2) / (360 / prizeCount)) % prizeCount;
+                        const prizeName = @json($prizes->pluck('name'))[prizeIndex];
+
+                        results.innerHTML = `Congratulations! You won ${prizeName}`;
+                    }, { once: true });
+                });
+            } else {
+                results.innerHTML = 'No prizes available.';
+            }
         });
 
         function toggleMenu() {
@@ -299,5 +318,4 @@
 </body>
 
 </html>
-
 
