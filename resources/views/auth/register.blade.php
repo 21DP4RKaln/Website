@@ -1,5 +1,4 @@
 <x-guest-layout>
-@extends('layouts.guest')
 
 @section('content')
 <form method="POST" action="{{ route('register') }}" class="w-full">

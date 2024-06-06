@@ -79,7 +79,7 @@
             </div>
             <div class="flex space-x-4">
                 <a href="#" class="hover:text-gray-800">Jaunumi</a>
-                <a href="#" class="hover:text-gray-800">Balvu programma</a>
+                <a href="{{ route('wheel') }}" class="hover:text-gray-800">Balvu programma</a>
                 <a href="#" class="hover:text-gray-800">Līzings</a>
                 <a href="#" class="hover:text-gray-800">Garantija</a>
                 <a href="#" class="hover:text-gray-800">Kontakti</a>
@@ -133,7 +133,7 @@
                     <a href="#" class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700">Jaunumi</a>
                 </li>
                 <li>
-                    <a href="#" class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700">Balvu programma</a>
+                    <a href="{{ route('wheel') }}" class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700">Balvu programma</a>
                 </li>
                 <li>
                     <a href="#" class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700">Līzings</a>
@@ -405,56 +405,56 @@
     </main>
 
     <!-- Footer -->
-<footer class="bg-gray-300 text-neutral-800">
-    <div class="container mx-auto px-4 py-8">
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div class="space-y-4 text-center md:text-left footer-section">
-                <!-- Trustpilot Section -->
-                <!-- TrustBox script -->
-                <script type="text/javascript" src="//widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js" async></script>
-                <!-- End TrustBox script -->
+    <footer class="bg-gray-300 text-neutral-800">
+        <div class="container mx-auto px-4 py-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="space-y-4 text-center md:text-left footer-section">
+                    <!-- Trustpilot Section -->
+                    <!-- TrustBox script -->
+                    <script type="text/javascript" src="//widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js" async></script>
+                    <!-- End TrustBox script -->
 
-                <!-- TrustBox widget - Review Collector -->
-                <div class="flex flex-col items-center text-center space-y-2">
-                    <div class="trustpilot-widget" data-locale="en-US" data-template-id="56278e9abfbbba0bdcd568bc" data-businessunit-id="665a1c0ef278f22f2d472bb7" data-style-height="52px" data-style-width="100%">
-                        <a href="https://www.trustpilot.com/review/api-14dprkalnins.kvalifikacija.rvt.lv" target="_blank" rel="noopener">Trustpilot</a>
+                    <!-- TrustBox widget - Review Collector -->
+                    <div class="flex flex-col items-center text-center space-y-2">
+                        <div class="trustpilot-widget" data-locale="en-US" data-template-id="56278e9abfbbba0bdcd568bc" data-businessunit-id="665a1c0ef278f22f2d472bb7" data-style-height="52px" data-style-width="100%">
+                            <a href="https://www.trustpilot.com/review/api-14dprkalnins.kvalifikacija.rvt.lv" target="_blank" rel="noopener">Trustpilot</a>
+                        </div>
+                        <p class="text-sm text-neutral-900 font-bold">DROŠI REALIZE SAVUS SAPNI AR GOGAMES</p>
                     </div>
-                    <p class="text-sm text-neutral-900 font-bold">DROŠI REALIZE SAVUS SAPNI AR GOGAMES</p>
                 </div>
-            </div>
-            <!-- Best choice for search your dream -->
-            <div class="space-y-4 text-center md:text-left footer-section">
-                <div class="flex justify-center md:justify-start">
-                    <img src="https://img.icons8.com/ios/50/000000/shopping-cart.png" alt="Best choice for Search your dream" class="h-12 mx-auto md:mx-0">
+                <!-- Best choice for search your dream -->
+                <div class="space-y-4 text-center md:text-left footer-section">
+                    <div class="flex justify-center md:justify-start">
+                        <img src="https://img.icons8.com/ios/50/000000/shopping-cart.png" alt="Best choice for Search your dream" class="h-12 mx-auto md:mx-0">
+                    </div>
+                    <h3 class="text-neutral-900 font-bold">LABĀKĀ IZVĒLE, LAI MEKLĒTU SAVU SAPNI</h3>
+                    <p class="text-sm">Mums ir vairāk nekā 71 oficiāls partneris un pārdevēji, lai izveidotu lielāko cenu salīdzināšanas datubāzi, kas specializējas komforta meklēšanā.</p>
                 </div>
-                <h3 class="text-neutral-900 font-bold">LABĀKĀ IZVĒLE, LAI MEKLĒTU SAVU SAPNI</h3>
-                <p class="text-sm">Mums ir vairāk nekā 71 oficiāls partneris un pārdevēji, lai izveidotu lielāko cenu salīdzināšanas datubāzi, kas specializējas komforta meklēšanā.</p>
+
+                <!-- Market Best Prices Section -->
+                <div class="space-y-4 text-center md:text-left footer-section">
+                    <div class="flex justify-center md:justify-start">
+                        <img src="https://img.icons8.com/ios/50/000000/price-tag.png" alt="Market Best Prices" class="h-12 mx-auto md:mx-0">
+                    </div>
+                    <h3 class="text-neutral-900 font-bold">TIRGUS LABĀKĀS CENAS</h3>
+                    <p class="text-sm">Pārbaudiet, meklējiet, izvēlieties labākos piedāvājumus no mūsu plašās preču izvēles.</p>
+                </div>
+
+                <!-- Support For 24/7 Section -->
+                <div class="space-y-4 text-center md:text-left footer-section">
+                    <div class="flex justify-center md:justify-start">
+                        <img src="https://img.icons8.com/ios/50/000000/phone-not-being-used.png" alt="Support for 24/7" class="h-12 mx-auto md:mx-0">
+                    </div>
+                    <h3 class="text-neutral-900 font-bold">ATBALSTS 24/7</h3>
+                    <p class="text-sm">Saņemiet atbalstu jebkurā diennakts laikā. Mēs esam šeit, lai palīdzētu jums visu diennakti.</p>
+                </div>
             </div>
 
-            <!-- Market Best Prices Section -->
-            <div class="space-y-4 text-center md:text-left footer-section">
-                <div class="flex justify-center md:justify-start">
-                    <img src="https://img.icons8.com/ios/50/000000/price-tag.png" alt="Market Best Prices" class="h-12 mx-auto md:mx-0">
-                </div>
-                <h3 class="text-neutral-900 font-bold">TIRGUS LABĀKĀS CENAS</h3>
-                <p class="text-sm">Pārbaudiet, meklējiet, izvēlieties labākos piedāvājumus no mūsu plašās preču izvēles.</p>
-            </div>
-
-            <!-- Support For 24/7 Section -->
-            <div class="space-y-4 text-center md:text-left footer-section">
-                <div class="flex justify-center md:justify-start">
-                    <img src="https://img.icons8.com/ios/50/000000/phone-not-being-used.png" alt="Support for 24/7" class="h-12 mx-auto md:mx-0">
-                </div>
-                <h3 class="text-neutral-900 font-bold">ATBALSTS 24/7</h3>
-                <p class="text-sm">Saņemiet atbalstu jebkurā diennakts laikā. Mēs esam šeit, lai palīdzētu jums visu diennakti.</p>
+            <div class="mt-8 text-center text-sm text-neutral-600">
+                &copy; 2023 GoGames. All rights reserved.
             </div>
         </div>
-
-        <div class="mt-8 text-center text-sm text-neutral-600">
-            &copy; 2023 GoGames. All rights reserved.
-        </div>
-    </div>
-</footer>
+    </footer>
 
     <!-- Optional CSS for additional styling -->
     <style>
