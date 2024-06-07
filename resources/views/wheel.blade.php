@@ -96,12 +96,18 @@
                     </div>
                 </div>
                 <div class="flex items-center gap-4 hidden sm:flex">
-                    <a class="rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-teal-700" href="{{ route('login') }}">
-                        Login
-                    </a>
-                    <a class="rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-teal-600 transition hover:text-teal-600/75" href="{{ route('register') }}">
-                        Register
-                    </a>
+                    @auth
+                        <a class="rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-teal-700" href="{{ route('profile') }}">
+                            Profile
+                        </a>
+                    @else
+                        <a class="rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-teal-700" href="{{ route('login') }}">
+                            Login
+                        </a>
+                        <a class="rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-teal-600 transition hover:text-teal-600/75" href="{{ route('register') }}">
+                            Register
+                        </a>
+                    @endauth
                 </div>
                 <button class="sm:hidden p-2 text-gray-600 hover:text-gray-700" onclick="toggleMenu()">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">

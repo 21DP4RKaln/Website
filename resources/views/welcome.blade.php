@@ -129,11 +129,11 @@
             <ul class="space-y-1">
                 @auth
                     <li>
-                        <a href="{{ route('profile') }}" class="block rounded-lg bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700">Profile</a>
+                        <a href="{{ route('profile') }}" class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-700">Profile</a>
                     </li>
                 @else
                     <li>
-                        <a href="{{ route('login') }}" class="block rounded-lg bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700">Login</a>
+                        <a href="{{ route('login') }}" class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-700">Login</a>
                     </li>
                     <li>
                         <a href="{{ route('register') }}" class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700">Register</a>
@@ -400,16 +400,22 @@
                     <img src="/path/to/your/image.png" alt="Main Banner" class="w-full h-64 object-cover">
                     <!-- Add more content as necessary -->
                 </div>
-                <div class="mt-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                    <!-- Example of a product item -->
-                    <div class="bg-white p-4 shadow product-item" data-category="Datori">
-                        <img src="/path/to/product/image.png" alt="Product" class="w-full h-32 object-cover">
-                        <h3 class="mt-2 text-lg font-bold">Product Name</h3>
-                        <p class="text-gray-700">$100.00</p>
-                    </div>
-                    <!-- Add more product items as necessary -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    @foreach($productsByCategory as $category => $products)
+                        <div>
+                            <h2 class="text-xl font-bold mt-5"></h2>
+                            @foreach($products as $product)
+                                <div class="bg-white p-4 shadow product-item" data-category="{{ $product->category }}">
+                                    @if ($product->image)
+                                        <img src="{{ asset('images/' . $product->image) }}" alt="{{ $product->name }}" class="w-full h-32 object-cover">
+                                    @endif
+                                    <h3 class="mt-2 text-lg font-bold">{{ $product->name }}</h3>
+                                    <p class="text-gray-700">${{ number_format($product->price, 2) }}</p>
+                                </div>
+                            @endforeach
+                        </div>
+                    @endforeach
                 </div>
-            </div>
         </div>
     </main>
 
@@ -538,5 +544,4 @@
 </body>
 
 </html>
-
 

@@ -12,7 +12,7 @@ class User extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable;
 
     protected $fillable = [
-        'nickname',
+        'name',
         'first_name',
         'last_name',
         'email',
@@ -27,6 +27,7 @@ class User extends Authenticatable
         'facebook_username',
         'address',
         'mobile',
+        'is_admin',
     ];
 
     protected $hidden = [

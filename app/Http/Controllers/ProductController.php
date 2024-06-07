@@ -2,26 +2,43 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Product;
+use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    public function index()
+    public function __construct()
     {
-        $products = Product::latest()->take(3)->get();
-        return view('products', compact('products'));
+        $this->middleware('admin'); // Only admins can access these routes
     }
 
-    public function add()
+    public function create()
     {
-        // Logic to add a new product
+        return view('products.create');
     }
 
-    public function viewAll()
+    public function store(Request $request)
     {
-        $products = Product::all();
-        return view('products.viewAll', compact('products'));
+        $request->validate([
+            'name' => 'required',
+            'price' => 'required|numeric',
+            'description' => 'required',
+            'category' => 'required',
+            'specifics' => 'required',
+            'image_url' => 'nullable|url',
+        ]);
+
+        Product::create([
+            'name' => $request->name,
+            'price' => $request->price,
+            'description' => $request->description,
+            'category' => $request->category,
+            'specifics' => json_decode($request->specifics, true),
+            'image_url' => $request->image_url,
+        ]);
+
+        return redirect()->route('products.index')->with('success', 'Product added successfully');
     }
 }
+
 

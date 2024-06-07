@@ -11,14 +11,19 @@ use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SellingItemController;
 use App\Http\Controllers\WheelController;
+use App\Http\Controllers\WelcomeController;
+use App\Models\Product;
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('welcome');
+Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
 
 Auth::routes();
 
 Route::get('/wheel', [PrizeController::class, 'index'])->name('wheel');
+
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
+    Route::post('/products', [ProductController::class, 'store'])->name('products.store');
+});
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', function () {
@@ -31,11 +36,11 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('/spin', [WheelController::class, 'spin'])->middleware('auth');
 
-    Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
-    Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit'); // Маршрут для редактирования профиля
+    Route::get('/profile', [ProfileController::class, 'show'])->name('profile');
+    Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit'); 
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::post('/profile/avatar', [ProfileController::class, 'updateAvatar'])->name('profile.updateAvatar');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy'); // Маршрут для удаления профиля
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy'); 
     Route::get('/profile/link/{provider}', [ProfileController::class, 'linkAccount'])->name('profile.linkAccount');
 
     Route::get('/items/add', [ItemController::class, 'add'])->name('items.add');
@@ -53,6 +58,8 @@ Route::middleware(['auth'])->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+
 
 
 

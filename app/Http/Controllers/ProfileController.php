@@ -9,8 +9,8 @@ class ProfileController extends Controller
 {
     public function show()
     {
-        $user = Auth::user();
-        return view('profile.show', compact('user'));
+        $user = auth()->user();
+        return view('profile', compact('user'));
     }
 
     public function edit()
