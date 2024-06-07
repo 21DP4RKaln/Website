@@ -64,3 +64,13 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+## How to run
+First - YourDirectory/git clone https://github.com/21DP4RKaln/Website.git
+Secondy - In terminal composer install and npm install 
+Third - php artisan serve and npm run dev 
+Run XAMPP (Start - Apache, MySQL)
+And you in localhost :)
+
+## Technologies
+Laracel, tailwind 
