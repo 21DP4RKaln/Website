@@ -12,6 +12,12 @@ class PrizeController extends Controller
         $prizes = Prize::all();
         return view('wheel', compact('prizes'));
     }
+    public function showWheel()
+    {
+        $prizes = Prize::all(); // Ensure this fetches all necessary prize data including name and image
+        return view('wheel', compact('prizes'));
+    }
+
 }
 
 

@@ -63,6 +63,14 @@
         .shadow-none {
             box-shadow: none!important;
         }
+
+        .profile-avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin-right: 20px;
+            border: 2px solid #0a0a0a;
+        }
     </style>
 </head>
 <body class="font-sans antialiased">
@@ -84,9 +92,9 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex flex-column align-items-center text-center">
-                            <img src="#" alt="User" class="rounded-circle" width="150">
+                            <img src="path_to_profile_picture.jpg" alt="Profile Picture" class="profile-avatar">
                             <div class="mt-3">
-                                <h4>{{ $user->name }}</h4>
+                                <h4>{{ $user->nickname }}</h4>
                                 <p class="text-secondary mb-1">{{ $user->job_title }}</p>
                                 <p class="text-muted font-size-sm">{{ $user->location }}</p>
                                 <form action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data">
@@ -150,7 +158,7 @@
                                 <h6 class="mb-0">Full Name</h6>
                             </div>
                             <div class="col-sm-9 text-secondary">
-                                {{ $user->name }}
+                            {{ $user->first_name }} {{ $user->last_name }}
                             </div>
                         </div>
                         <hr>
@@ -168,16 +176,7 @@
                                 <h6 class="mb-0">Phone</h6>
                             </div>
                             <div class="col-sm-9 text-secondary">
-                                {{ $user->phone }}
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <h6 class="mb-0">Mobile</h6>
-                            </div>
-                            <div class="col-sm-9 text-secondary">
-                                {{ $user->mobile }}
+                                {{ $user->phone_number }}
                             </div>
                         </div>
                         <hr>
@@ -192,7 +191,7 @@
                         <hr>
                         <div class="row">
                             <div class="col-sm-12">
-                                <a class="btn btn-info " target="__blank" href="profile/edit">Edit</a>
+                                <a class="btn btn-info " target="__blank"  href="{{ route('profile.edit') }}"">Edit</a>
                             </div>
                         </div>
                     </div>

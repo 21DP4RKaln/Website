@@ -14,47 +14,24 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.6/flowbite.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.x.x/dist/alpine.min.js" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Winwheel/1.2.0/Winwheel.min.js"></script>
     <style>
         .main-content {
             padding: 20px;
         }
 
         .wheel-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             text-align: center;
-            margin: 20px 0;
+            margin: 20px auto;
         }
 
         .wheel {
-            width: 400px;
-            height: 400px;
-            border-radius: 50%;
             position: relative;
-            overflow: hidden;
-            margin: 0 auto;
-        }
-
-        .wheel .segment {
-            position: absolute;
-            width: 50%;
-            height: 50%;
-            transform-origin: 100% 100%;
-            clip-path: polygon(100% 0, 100% 100%, 0 100%);
-        }
-
-        .wheel .segment img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .button-container {
-            text-align: center;
-            margin-top: 20px;
-        }
-
-        .container {
-            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .spin-button {
@@ -66,6 +43,8 @@
             cursor: pointer;
             font-size: 18px;
             transition: background-color 0.3s;
+            display: block;
+            margin: 20px auto;
         }
 
         .spin-button:hover {
@@ -74,19 +53,9 @@
 
         .content {
             display: flex;
-            justify-content: space-between;
-        }
-
-        .sidebar {
-            width: 25%;
-            background-color: #d1d5db;
-            padding: 20px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .sidebar img {
-            width: 100%;
-            margin-bottom: 20px;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
         }
 
         .main {
@@ -99,30 +68,15 @@
             padding: 10px;
             border-radius: 5px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
         }
+
     </style>
 </head>
 
 <body>
-    <!-- Top container -->
-    <div id="top-container" class="bg-gray-200 border-separator hidden sm:block">
-        <div class="container mx-auto px-4 py-2 flex justify-between items-center text-sm text-gray-600">
-            <div>
-                <a href="#" class="hover:text-gray-800">RUS</a> | 
-                <a href="#" class="hover:text-gray-800">ENG</a>
-            </div>
-            <div>
-                Tāl: 64627387 gsm 26077632 (p.o.t.c.p. 9:00-18:00)
-            </div>
-            <div class="flex space-x-4">
-                <a href="#" class="hover:text-gray-800">Jaunumi</a>
-                <a href="{{ route('wheel') }}" class="hover:text-gray-800">Balvu programma</a>
-                <a href="#" class="hover:text-gray-800">Līzings</a>
-                <a href="#" class="hover:text-gray-800">Garantija</a>
-                <a href="#" class="hover:text-gray-800">Kontakti</a>
-            </div>
-        </div>
-    </div>
 
     <header class="bg-neutral-200 border-separator">
         <div class="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
@@ -142,18 +96,12 @@
                     </div>
                 </div>
                 <div class="flex items-center gap-4 hidden sm:flex">
-                    @auth
-                        <a class="rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-teal-700" href="{{ route('profile') }}">
-                            Profile
-                        </a>
-                    @else
-                        <a class="rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-teal-700" href="{{ route('login') }}">
-                            Login
-                        </a>
-                        <a class="rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-teal-600 transition hover:text-teal-600/75" href="{{ route('register') }}">
-                            Register
-                        </a>
-                    @endauth
+                    <a class="rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-teal-700" href="{{ route('login') }}">
+                        Login
+                    </a>
+                    <a class="rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-teal-600 transition hover:text-teal-600/75" href="{{ route('register') }}">
+                        Register
+                    </a>
                 </div>
                 <button class="sm:hidden p-2 text-gray-600 hover:text-gray-700" onclick="toggleMenu()">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -164,18 +112,14 @@
         </div>
         <div id="mobile-menu" class="px-4 py-2 hidden sm:hidden">
             <ul class="space-y-1">
-                @auth
-                    <li>
-                        <a href="{{ route('profile') }}" class="block rounded-lg bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700">Profile</a>
-                    </li>
-                @else
-                    <li>
-                        <a href="{{ route('login') }}" class="block rounded-lg bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700">Login</a>
-                    </li>
-                    <li>
-                        <a href="{{ route('register') }}" class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700">Register</a>
-                    </li>
-                @endauth
+                <li>
+                    <a href="{{ route('login') }}" class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-700">Login</a>
+                </li>
+
+                <li>
+                    <a href="{{ route('register') }}" class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700">Register</a>
+                </li>
+
                 <li>
                     <a href="#" class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700">Jaunumi</a>
                 </li>
@@ -185,6 +129,7 @@
                 <li>
                     <a href="#" class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700">Līzings</a>
                 </li>
+
                 <li>
                     <a href="#" class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700">Garantija</a>
                 </li>
@@ -202,25 +147,17 @@
                     <div class="wheel-container">
                         <h2 class="text-2xl font-bold mb-4">ALLKEYSHOP REWARD PROGRAM</h2>
                         <p>Once a day, you can spin the wheel of fortune and have a 100% chance to win a prize.</p>
-                        <div class="wheel" id="wheel" data-prize-count="{{ $prizes->count() }}">
-                            @foreach ($prizes as $index => $prize)
-                                <div class="segment" style="transform: rotate({{ $index * (360 / $prizes->count()) }}deg);">
-                                    <img src="{{ asset('storage/' . $prize->image) }}" alt="{{ $prize->name }}">
-                                </div>
-                            @endforeach
+                        <div class="wheel">
+                            <div class="arrow"></div>
+                            <canvas id="canvas" width="400" height="400"></canvas>
                         </div>
                         <div class="button-container">
-                            <button class="spin-button" id="spinButton">Spin</button>
+                            <button class="spin-button" id="spin">Spin</button>
+                            <div id="timer" style="margin-top: 10px; font-size: 18px;"></div>
                         </div>
                         <div class="results" id="results"></div>
                     </div>
                 </div>
-                <!-- Sidebar content -->
-                <aside class="sidebar">
-                    <img src="{{ asset('images/sidebar-image.png') }}" alt="Sidebar Image">
-                    <img src="{{ asset('images/another-sidebar-image.png') }}" alt="Sidebar Image">
-                    <!-- Add more sidebar content as needed -->
-                </aside>
             </div>
         </div>
     </main>
@@ -278,44 +215,162 @@
     </footer>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const wheel = document.querySelector('#wheel');
-            const results = document.querySelector('#results');
-            const prizeCount = wheel.getAttribute('data-prize-count');
+        const wheelCanvas = document.getElementById('canvas');
+        const ctx = wheelCanvas.getContext('2d');
 
-            if (prizeCount > 0) {
-                const randomDegree = Math.floor(Math.random() * 360);
-                const rotation = 360 * 5 + randomDegree; // 5 full rotations + random degree
-                wheel.style.transition = 'transform 5s ease-out';
-                wheel.style.transform = `rotate(${rotation}deg)`;
+        const segments = [
+            { name: '5000 points', probability: 0.30 },
+            { name: 'Super prize', probability: 0.01 },
+            { name: '5000 points', probability: 0.30 },
+            { name: '-10%', probability: 0.05 },
+            { name: '10000 points', probability: 0.15 },
+            { name: '-10%', probability: 0.05 },
+            { name: '15000 points', probability: 0.11 },
+            { name: '-15%', probability: 0.03 }
+        ];
 
-                document.querySelector('#spinButton').addEventListener('click', function () {
-                    // Clear previous result
-                    results.innerHTML = '';
+        const colors = [
+            '#94a3b8',
+            '#facc15',
+            '#94a3b8',
+            '#2dd4bf',
+            '#94a3b8',
+            '#2dd4bf',
+            '#94a3b8',
+            '#2dd4bf'
+        ];
 
-                    // Spin the wheel
-                    wheel.style.transform = `rotate(${rotation}deg)`;
+        const radius = wheelCanvas.width / 2;
+        const spinButton = document.getElementById('spin');
 
-                    // Logic to handle the result after spinning
-                    wheel.addEventListener('transitionend', function () {
-                        const actualDegree = rotation % 360;
-                        const prizeIndex = Math.floor((actualDegree + (360 / prizeCount) / 2) / (360 / prizeCount)) % prizeCount;
-                        const prizeName = @json($prizes->pluck('name'))[prizeIndex];
+        function drawWheel() {
+            for (let i = 0; i < segments.length; i++) {
+                const angle = (i * 2 * Math.PI) / segments.length;
+                ctx.beginPath();
+                ctx.moveTo(radius, radius);
+                ctx.arc(radius, radius, radius, angle, angle + (2 * Math.PI) / segments.length);
+                ctx.fillStyle = colors[i];
+                ctx.fill();
+                ctx.save();
 
-                        results.innerHTML = `Congratulations! You won ${prizeName}`;
-                    }, { once: true });
-                });
-            } else {
-                results.innerHTML = 'No prizes available.';
+                ctx.translate(
+                    radius + Math.cos(angle + Math.PI / segments.length) * radius / 2,
+                    radius + Math.sin(angle + Math.PI / segments.length) * radius / 2
+                );
+                ctx.rotate(angle + Math.PI / segments.length);
+                ctx.textAlign = 'center';
+                ctx.fillStyle = '#FFFFFF';
+                ctx.font = 'bold 14px Arial'; // Increase font size
+                ctx.fillText(segments[i].name, 0, 0);
+                ctx.restore();
             }
+        }
+
+        let startAngle = 0;
+        let spinTimeout = null;
+
+        function rotateWheel() {
+            startAngle += Math.random() * 0.1 + 0.01;
+            drawRotatedWheel();
+            spinTimeout = requestAnimationFrame(rotateWheel);
+        }
+
+        function drawRotatedWheel() {
+            ctx.clearRect(0, 0, wheelCanvas.width, wheelCanvas.height);
+            ctx.save();
+            ctx.translate(radius, radius);
+            ctx.rotate(startAngle);
+            ctx.translate(-radius, -radius);
+            drawWheel();
+            ctx.restore();
+        }
+
+        function getWeightedRandomSegment() {
+            const totalProbability = segments.reduce((acc, segment) => acc + segment.probability, 0);
+            let randomValue = Math.random() * totalProbability;
+            for (const segment of segments) {
+                if (randomValue < segment.probability) {
+                    return segment;
+                }
+                randomValue -= segment.probability;
+            }
+        }
+
+        function setSpinButtonState(disabled) {
+            spinButton.disabled = disabled;
+            if (disabled) {
+                spinButton.style.backgroundColor = '#ccc';
+                spinButton.innerText = 'Spin (disabled)';
+            } else {
+                spinButton.style.backgroundColor = '#14b8a6';
+                spinButton.innerText = 'Spin';
+            }
+        }
+
+        function updateTimer() {
+            const now = new Date().getTime();
+            const countDownDate = new Date(localStorage.getItem('nextSpinTime')).getTime();
+
+            const distance = countDownDate - now;
+
+            if (distance < 0) {
+                document.getElementById('timer').innerText = '';
+                setSpinButtonState(false);
+                return;
+            }
+
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById('timer').innerText = `Next spin in ${hours}h ${minutes}m ${seconds}s`;
+
+            setTimeout(updateTimer, 1000);
+        }
+
+        spinButton.addEventListener('click', () => {
+            const now = new Date();
+            const nextSpinTime = new Date(localStorage.getItem('nextSpinTime'));
+
+            if (nextSpinTime && now < nextSpinTime) {
+                alert('You can only spin once every 24 hours.');
+                return;
+            }
+
+            setSpinButtonState(true);
+            rotateWheel();
+            setTimeout(() => {
+                cancelAnimationFrame(spinTimeout);
+                setSpinButtonState(false);
+                const winningSegment = getWeightedRandomSegment();
+                document.getElementById('results').innerText = `Congratulations! You won ${winningSegment.name}`;
+
+                const newNextSpinTime = new Date();
+                newNextSpinTime.setHours(newNextSpinTime.getHours() + 24);
+                localStorage.setItem('nextSpinTime', newNextSpinTime);
+
+                updateTimer();
+            }, 5000); // Spin for 5 seconds
         });
+
+        drawWheel();
+        updateTimer();
 
         function toggleMenu() {
             const menu = document.getElementById('mobile-menu');
             menu.classList.toggle('hidden');
         }
+
     </script>
 </body>
 
 </html>
+
+
+
+
+
+
+
+
 

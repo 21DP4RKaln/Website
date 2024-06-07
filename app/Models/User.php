@@ -18,6 +18,15 @@ class User extends Authenticatable
         'email',
         'phone_number',
         'password',
+        'profile_picture',
+        'job_title',
+        'location',
+        'github_username',
+        'twitter_username',
+        'instagram_username',
+        'facebook_username',
+        'address',
+        'mobile',
     ];
 
     protected $hidden = [
@@ -41,9 +50,11 @@ class User extends Authenticatable
 
     public function getProfilePictureUrlAttribute()
     {
-        return $this->avatar ? asset('storage/' . $this->avatar) : asset('images/default-avatar.png');
+        return $this->profile_picture ? asset('storage/' . $this->profile_picture) : asset('images/default-avatar.png');
     }
 }
+
+
 
 
 

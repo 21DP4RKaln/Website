@@ -10,6 +10,7 @@ use App\Http\Controllers\ItemController;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SellingItemController;
+use App\Http\Controllers\WheelController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -28,10 +29,14 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/wheel', [PrizeController::class, 'index'])->name('wheel');
 
-    Route::get('/profile', [ProfileController::class, 'show'])->name('profile');
-    Route::post('/profile/updateAvatar', [ProfileController::class, 'updateAvatar'])->name('profile.updateAvatar');
-    Route::put('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
-    Route::get('/profile/linkAccount/{provider}', [ProfileController::class, 'linkAccount'])->name('profile.linkAccount');
+    Route::post('/spin', [WheelController::class, 'spin'])->middleware('auth');
+
+    Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
+    Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit'); // Маршрут для редактирования профиля
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::post('/profile/avatar', [ProfileController::class, 'updateAvatar'])->name('profile.updateAvatar');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy'); // Маршрут для удаления профиля
+    Route::get('/profile/link/{provider}', [ProfileController::class, 'linkAccount'])->name('profile.linkAccount');
 
     Route::get('/items/add', [ItemController::class, 'add'])->name('items.add');
     Route::get('/items/viewAll', [ItemController::class, 'viewAll'])->name('items.viewAll');
@@ -48,4 +53,6 @@ Route::middleware(['auth'])->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+
 

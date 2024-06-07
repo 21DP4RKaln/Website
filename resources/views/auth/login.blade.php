@@ -140,6 +140,12 @@
         button::-moz-focus-inner { 
             border: 0; 
         }
+
+        .form-checkbox {
+            width: 20px;
+            height: 20px;
+        }
+
         #submit {
             color: #707075;
             margin-top: 40px;
@@ -181,13 +187,10 @@
         <div class="container">
             <div class="left">
                 <div class="login">{{ __('Login') }}</div>
-                <div class="eula">By logging in you agree to the ridiculously long terms that you didn't bother to read</div>
-            
-                <div class="flex items-center justify-between mt-2">
-                    <label for="remember_me" class="inline-flex items-center">
-                        <input id="remember_me" type="checkbox" class="form-checkbox" name="remember">
-                        <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-                    </label>
+                <div class="eula">By logging in you agree to the ridiculously long terms that you didn't bother to read
+                <div>   
+                    <input id="remember_me" type="checkbox" class="form-checkbox" name="remember"></div> 
+                    <span class="ml-2">{{ __('Remember me') }}</span>
                 </div>
             </div>
             <div class="right">
